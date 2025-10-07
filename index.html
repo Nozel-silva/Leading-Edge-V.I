@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>L.E.V.I Plans</title>
+  <style>
+    body {
+      font-family: 'Poppins', sans-serif;
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #f9f9f9, #e8ffe8);
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    header {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #1b5e20;
+      margin: 40px 0;
+      animation: glow 2s infinite alternate;
+    }
+
+    @keyframes glow {
+      0% { opacity: 1; text-shadow: 0 0 10px #66bb6a; }
+      100% { opacity: 0.3; text-shadow: 0 0 0 transparent; }
+    }
+
+    .plans-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 30px;
+      width: 90%;
+      max-width: 1000px;
+    }
+
+    .plan {
+      background: #fff;
+      border-radius: 15px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+      width: 280px;
+      padding: 30px 20px;
+      text-align: center;
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+
+    .plan:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+    }
+
+    .plan h2 {
+      color: #2e7d32;
+      margin-bottom: 10px;
+    }
+
+    .price {
+      font-size: 2rem;
+      font-weight: bold;
+      color: #1b5e20;
+      margin: 10px 0 20px 0;
+    }
+
+    .features {
+      text-align: left;
+      padding-left: 20px;
+      font-size: 0.95rem;
+      color: #333;
+      margin-bottom: 25px;
+    }
+
+    .features li {
+      margin-bottom: 8px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 25px;
+      border: none;
+      background: #43a047;
+      color: white;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.3s;
+      text-decoration: none;
+    }
+
+    .btn:hover {
+      background: #2e7d32;
+      transform: scale(1.05);
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      font-size: 0.9rem;
+      color: #444;
+      margin-top: 40px;
+    }
+
+    footer span {
+      color: #1b5e20;
+      font-weight: bold;
+    }
+  </style>
+</head>
+<body>
+  <header>LEADING EDGE</header>
+
+  <div class="plans-container">
+    <!-- Free Plan -->
+    <div class="plan">
+      <h2>Free Plan</h2>
+      <div class="price">$0</div>
+      <ul class="features">
+        <li>✔ Pop-up ads and redirects enabled</li>
+        <li>✔ Upload images ≤ 1MB</li>
+        <li>✔ Access to basic tools</li>
+      </ul>
+      <a href="https://wa.me/2349016501345?text=I'd%20like%20to%20opt%20for%20the%20Free%20Plan" class="btn">Choose Free</a>
+    </div>
+
+    <!-- Basic Plan -->
+    <div class="plan">
+      <h2>Basic Plan</h2>
+      <div class="price">$5</div>
+      <ul class="features">
+        <li>✔ No pop-up ads or redirects</li>
+        <li>✔ Upload images ≤ 1.5MB</li>
+        <li>✔ Faster performance</li>
+      </ul>
+      <a href="https://wa.me/2349016501345?text=I'd%20like%20to%20opt%20for%20the%20Basic%20Plan" class="btn">Choose Basic</a>
+    </div>
+
+    <!-- Pro Plan -->
+    <div class="plan">
+      <h2>Pro Plan</h2>
+      <div class="price">$50</div>
+      <ul class="features">
+        <li>✔ Custom-made webpage to your taste</li>
+        <li>✔ No ads or redirects</li>
+        <li>✔ Upload images ≤ 2MB</li>
+        <li>✔ Priority support</li>
+      </ul>
+      <a href="https://wa.me/2349016501345?text=I'd%20like%20to%20opt%20for%20the%20Pro%20Plan" class="btn">Choose Pro</a>
+    </div>
+  </div>
+
+  <footer>
+    Powered by <span>Leading Edge Virtual Insight (L.E.V.I)</span>
+  </footer>
+</body>
+</html>
