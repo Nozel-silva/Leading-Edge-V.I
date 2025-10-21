@@ -189,4 +189,57 @@
   <header>
     <h1>L.E.V.I Contracting</h1>
     <nav>
-    
+      <a href="#">Home</a>
+      <a href="#services">Services</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <h2>Building Smart Software & Modern Websites</h2>
+    <p>We help brands, startups, and businesses turn ideas into clean, scalable digital products — fast, reliable, and built for growth.</p>
+    <button>Get a Free Quote</button>
+  </section>
+
+  <section class="services" id="services">
+    <h3>Our Services</h3>
+    <div class="service-grid">
+      <div class="card">
+        <h4>Web Development</h4>
+        <p>Responsive, SEO-friendly websites built with Next.js, PHP, and JavaScript — tailored for your business.</p>
+      </div>
+      <div class="card">
+        <h4>Software Solutions</h4>
+        <p>Custom-built applications and dashboards using modern stacks like Python and Supabase.</p>
+      </div>
+      <div class="card">
+        <h4>Brand & Marketing Tech</h4>
+        <p>Integrating AI tools and analytics to power campaigns, automate sales, and scale your online presence.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <h3>Let's Build Something Great</h3>
+    <p>Have a project in mind? Get in touch and let’s bring your idea to life.</p>
+    <button>Contact Us</button>
+  </section>
+
+  <footer>
+    © 2025 L.E.V.I Contracting — Software & Web Solutions
+  </footer>
+
+  <script>
+    // Scroll reveal effect for cards
+    const cards = document.querySelectorAll('.card');
+    window.addEventListener('scroll', () => {
+      const triggerBottom = window.innerHeight * 0.85;
+      cards.forEach(card => {
+        const cardTop = card.getBoundingClientRect().top;
+        if (cardTop < triggerBottom) card.classList.add('show');
+      });
+    });
+  </script>
+
+</body>
+</html>
