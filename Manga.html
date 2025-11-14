@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anime Tech Hub</title>
+
+<!-- Tailwind -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Anime.js -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+
+<style>
+  /* CINEMATIC INTRO */
+  #leviLoader {
+    position: fixed;
+    inset: 0;
+    background: black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    z-index: 9999;
+  }
+  #leviLoader span {
+    font-size: 4.2rem;
+    font-weight: 900;
+    opacity: 0;
+    color: #00eaff;
+    text-shadow: 0 0 20px #00eaff;
+  }
+
+  /* HOLOGRAM GRID BACKGROUND */
+  body {
+    background: radial-gradient(circle at center, #0c0f17, #06070d 70%);
+  }
+  .techGrid {
+    background-image: linear-gradient(#00eaff22 1px, transparent 1px),
+                      linear-gradient(90deg, #00eaff22 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  /* SLIDER */
+  .slider {
+    position: relative;
+    height: 250px;
+    overflow: hidden;
+  }
+  .slide {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: 1.2s ease;
+    filter: brightness(0.6) saturate(1.2);
+  }
+  .slide.active {
+    opacity: 1;
+  }
+
+  /* SIDE MENU */
+  #sideMenu {
+    position: fixed;
+    inset-y: 0;
+    left: -260px;
+    width: 260px;
+    background: #03060bfa;
+    backdrop-filter: blur(10px);
+    transition: 0.4s ease;
+    z-index: 9900;
+    border-right: 1px solid #00eaff55;
+    box-shadow: 0 0 20px #00eaff33;
+  }
+  #sideMenu.active {
+    left: 0;
+  }
+
+  /* HOLOGRAM CARD */
+  .holoCard {
+    background: rgba(0, 238, 255, 0.06);
+    border: 1px solid #00eaff40;
+    box-shadow: 0 0 15px #00eaff20;
+    position: relative;
+    overflow: hidden;
+  }
+  .holoCard:before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent, #00eaff22, transparent);
+    transform: translateX(-100%);
+    transition: 0.6s;
+  }
+  .holoCard:hover:before {
+    transform: translateX(100%);
+  }
+</style>
+</head>
+
+<body class="techGrid text-white">
+
+<!-- INTRO -->
+<div id="leviLoader">
+  <span>L</span><span>.</span>
+  <span>E</span><span>.</span>
+  <span>V</span><span>.</span>
+  <span>I</span>
+</div>
+
+<!-- SIDE MENU -->
+<div id="sideMenu" class="p-6 space-y-4">
+  <div class="text-right">
+    <button onclick="toggleMenu()"
+      class="text-xl text-cyan-300 hover:text-cyan-400">✖</button>
+  </div>
+  <a class="block text-cyan-300 hover:text-white">Home</a>
+  <a class="block text-cyan-300 hover:text-white">Top Anime</a>
+  <a class="block text-cyan-300 hover:text-white">Manga List</a>
+  <a class="block text-cyan-300 hover:text-white">About</a>
+</div>
+
+<!-- MENU BUTTON -->
+<button onclick="toggleMenu()"
+class="fixed top-4 left-4 bg-black/50 p-3 rounded-xl border border-cyan-500/40 text-cyan-300 z-50 shadow-lg hover:scale-110 transition">
+  ☰
+</button>
+
+<!-- SLIDER -->
+<div id="pageOverlay"></div>
+<div class="slider">
+  <div class="slide active" style="background-image:url('https://i.ibb.co/42kK48W/bg1.jpg');"></div>
+  <div class="slide" style="background-image:url('https://i.ibb.co/8YbjnqX/bg2.jpg');"></div>
+  <div class="slide" style="background-image:url('https://i.ibb.co/0FL2Lyc/bg3.jpg');"></div>
+  <div class="slide" style="background-image:url('https://i.ibb.co/rvGtP9g/bg4.jpg');"></div>
+</div>
+
+<!-- CONTENT -->
+<section class="p-6">
+
+  <h1 class="text-4xl font-bold mb-6 text-cyan-300 drop-shadow-lg">
+    Anime Tech Hub
+  </h1>
+
+  <!-- SEARCH -->
+  <input id="searchInput" 
+    placeholder="Search anime..."
+    class="w-full p-3 rounded-xl bg-black/40 border border-cyan-400/40 
+           focus:border-cyan-300 outline-none mb-6 text-cyan-200">
+  
+  <!-- LIST -->
+  <div id="animeList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+
+</section>
+
+<!-- FOOTER -->
+<footer class="text-center text-cyan-300 py-6 opacity-60">
+  Powered by <span class="text-cyan-400 font-bold">LeadingEdge</span>
+</footer>
+
+<script>
+/* INTRO ANIMATION */
+window.onload = () => {
+  anime({
+    targets: "#leviLoader span",
+    opacity: [0, 1],
+    translateY: [40, 0],
+    scale: [0.6, 1],
+    delay: anime.stagger(200),
+    duration: 700,
+    easing: "easeOutExpo"
+  });
+
+  setTimeout(() => {
+    anime({
+      targets: "#leviLoader",
+      opacity: [1, 0],
+      duration: 900,
+      easing: "easeInOutQuad",
+      complete: () => document.getElementById("leviLoader").remove()
+    });
+  }, 2000);
+};
+
+/* SLIDER */
+let i = 0;
+const slides = document.querySelectorAll(".slide");
+setInterval(() => {
+  slides[i].classList.remove("active");
+  i = (i + 1) % slides.length;
+  slides[i].classList.add("active");
+}, 5000);
+
+/* SIDE MENU */
+const sideMenu = document.getElementById("sideMenu");
+const overlay = document.createElement("div");
+overlay.id = "overlay";
+
+function toggleMenu() {
+  const active = sideMenu.classList.toggle("active");
+
+  if (active) {
+    overlay.className = "fixed inset-0 bg-black/40 z-40";
+    overlay.onclick = toggleMenu;
+    document.body.appendChild(overlay);
+  } else {
+    overlay.remove();
+  }
+}
+
+/* ANIME LIST */
+const animeData = [
+  { name: "Attack On Titan", link: "https://mangareader.to/attack-on-titan-112" },
+  { name: "Jujutsu Kaisen", link: "https://mangareader.to/jujutsu-kaisen-183" },
+  { name: "One Piece", link: "https://mangareader.to/one-piece-3" },
+  { name: "Solo Leveling", link: "https://mangareader.to/solo-leveling-8403" },
+  { name: "Bleach", link: "https://mangareader.to/bleach-2" },
+  { name: "Chainsaw Man", link: "https://mangareader.to/chainsaw-man-235" }
+];
+
+function renderAnime(arr) {
+  const list = document.getElementById("animeList");
+  list.innerHTML = arr.map(a => `
+    <div class="holoCard p-4 rounded-xl hover:scale-105 transition">
+      <h3 class="text-xl font-bold text-cyan-300">${a.name}</h3>
+      <a href="${a.link}" class="text-cyan-400 underline">Read Manga</a>
+    </div>
+  `).join("");
+}
+renderAnime(animeData);
+
+/* SEARCH */
+document.getElementById("searchInput").addEventListener("input", e => {
+  const q = e.target.value.toLowerCase();
+  const filtered = animeData.filter(a => a.name.toLowerCase().includes(q));
+  renderAnime(filtered);
+});
+</script>
+
+</body>
+  </html>
+  
