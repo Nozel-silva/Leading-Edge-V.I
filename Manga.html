@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Anime Manga Hub</title>
 
-<!-- Tailwind CDN -->
+<!-- Tailwind -->
 <script src="https://cdn.tailwindcss.com"></script>
 
 <!-- Anime.js -->
@@ -18,7 +18,7 @@
         font-family: 'Montserrat', sans-serif;
     }
 
-    /* Decorative glows */
+    /* Neon Glows */
     .glow {
         position: absolute;
         width: 250px;
@@ -29,7 +29,7 @@
         pointer-events: none;
     }
 
-    /* Intro screen */
+    /* Intro Screen */
     #introScreen {
         position: fixed;
         inset: 0;
@@ -46,15 +46,20 @@
         font-weight: 900;
         color: cyan;
         opacity: 0;
-        text-shadow: 0 0 20px cyan, 0 0 40px cyan;
+        text-shadow: 0 0 15px cyan, 0 0 40px cyan, 0 0 70px cyan;
     }
 
-    /* Sidebar transition */
+    /* Slideshow transitions */
+    #slider img {
+        transition: opacity 1s ease-in-out;
+    }
+
+    /* Sidebar */
     #sidebar {
         transition: transform .3s ease;
     }
 
-    /* Card hover effect */
+    /* Cards */
     .anime-card {
         transition: all .3s;
     }
@@ -62,21 +67,16 @@
         transform: translateY(-4px);
         box-shadow: 0 0 25px rgba(0,255,255,.30);
     }
-
-    /* Slideshow */
-    #slider img {
-        transition: opacity 1s ease-in-out;
-    }
 </style>
-</head>
 
+</head>
 <body class="text-white">
 
-<!-- GLOWS -->
+<!-- GLOW ELEMENTS -->
 <div class="glow top-20 left-10"></div>
 <div class="glow bottom-20 right-20"></div>
 
-<!-- INTRO SCREEN -->
+<!-- INTRO CINEMATIC -->
 <div id="introScreen">
     <h1 id="L">L.</h1>
     <h1 id="E">E.</h1>
@@ -84,35 +84,40 @@
     <h1 id="I">I</h1>
 </div>
 
+<!-- MAIN CONTENT -->
 <div id="mainContent" class="hidden">
 
-    <!-- TOP AD BANNER -->
+    <!-- TOP AD -->
     <div class="w-full bg-gray-900/40 border border-cyan-500/20 p-2 text-center text-cyan-300 text-sm">
         🔥 Ad Banner Space — Promote your brand here 🔥
     </div>
 
-    <!-- NAV -->
+    <!-- NAVIGATION -->
     <div class="flex justify-between items-center p-4">
         <button id="openSidebar" class="text-cyan-300 text-2xl">☰</button>
         <h2 class="text-xl font-bold text-cyan-300 tracking-wide">Anime Manga Hub</h2>
     </div>
 
-    <!-- SIDEBAR + overlay -->
+    <!-- OVERLAY -->
     <div id="overlay" class="fixed inset-0 bg-black/50 hidden"></div>
 
-    <div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-900/90 backdrop-blur-xl p-6 transform -translate-x-full z-50">
+    <!-- SIDEBAR -->
+    <div id="sidebar"
+        class="fixed top-0 left-0 w-64 h-full bg-gray-900/90 backdrop-blur-xl p-6 transform -translate-x-full z-50">
+        
         <button id="closeSidebar" class="text-right w-full text-2xl text-cyan-300">×</button>
+
         <h3 class="text-cyan-400 font-bold mb-4 text-lg">Menu</h3>
+
         <ul class="space-y-3">
-            <li class="hover:text-cyan-300">🏠 Home</li>
-            <li class="hover:text-cyan-300">⭐ Favorites</li>
-            <li class="hover:text-cyan-300">📚 Manga Library</li>
-            <li class="hover:text-cyan-300">⚙ Settings</li>
+            <li class="hover:text-cyan-300 cursor-pointer">🏠 Home</li>
+            <li class="hover:text-cyan-300 cursor-pointer">📚 Manga Library</li>
+            <li class="hover:text-cyan-300 cursor-pointer">⭐ Favorites</li>
+            <li class="hover:text-cyan-300 cursor-pointer">⚙ Settings</li>
         </ul>
     </div>
 
-
-    <!-- image slideshow / hero -->
+    <!-- IMAGE SLIDESHOW -->
     <div class="relative w-full h-56 md:h-72 overflow-hidden rounded-xl shadow-lg mx-auto px-3">
         <div id="slider" class="w-full h-full">
             <img src="https://picsum.photos/800/400?random=1" class="absolute inset-0 w-full h-full object-cover opacity-100">
@@ -123,33 +128,55 @@
 
     <!-- MID AD -->
     <div class="w-full bg-gray-900/40 border border-cyan-500/20 p-3 mt-6 text-center text-cyan-300">
-        Sponsored Ad — Your banner can be placed here
+        Sponsored Ad — Your banner here
     </div>
 
-    <!-- Anime Listing -->
-    <div class="px-6 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
-        <div class="anime-card bg-gray-800/40 border border-cyan-500/20 p-5 rounded-xl backdrop-blur-xl">
-            <h3 class="text-xl font-bold text-cyan-300">Jujutsu Kaisen</h3>
-            <p class="text-gray-400 text-sm mt-1">Supernatural / Action</p>
-            <a href="#" class="text-cyan-400 mt-3 inline-block">Read Manga →</a>
+    <!-- MANGA LIBRARY -->
+    <section class="px-6 mt-10" id="librarySection">
+        
+        <h2 class="text-2xl font-bold text-cyan-300 mb-4">📚 Manga Library</h2>
+
+        <!-- SEARCH BAR -->
+        <div class="mb-6">
+            <input 
+                id="searchBar"
+                type="text"
+                placeholder="Search manga..."
+                class="w-full p-3 rounded-lg bg-gray-800/60 border border-cyan-500/30 text-white focus:outline-none focus:ring focus:ring-cyan-400 placeholder-gray-400"
+            >
         </div>
 
-        <div class="anime-card bg-gray-800/40 border border-cyan-500/20 p-5 rounded-xl backdrop-blur-xl">
-            <h3 class="text-xl font-bold text-cyan-300">Attack on Titan</h3>
-            <p class="text-gray-400 text-sm mt-1">Action / Dark Fantasy</p>
-            <a href="#" class="text-cyan-400 mt-3 inline-block">Read Manga →</a>
-        </div>
+        <!-- GRID -->
+        <div id="mangaList" 
+             class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
 
-        <div class="anime-card bg-gray-800/40 border border-cyan-500/20 p-5 rounded-xl backdrop-blur-xl">
-            <h3 class="text-xl font-bold text-cyan-300">Demon Slayer</h3>
-            <p class="text-gray-400 text-sm mt-1">Adventure / Shonen</p>
-            <a href="#" class="text-cyan-400 mt-3 inline-block">Read Manga →</a>
+            <div class="anime-card bg-gray-800/40 border border-cyan-500/20 p-5 rounded-xl"
+                 data-title="jujutsu kaisen">
+                <h3 class="text-xl font-bold text-cyan-300">Jujutsu Kaisen</h3>
+                <p class="text-gray-400 text-sm mt-1">Supernatural / Action</p>
+                <a href="#" class="text-cyan-400 mt-3 inline-block">Read Manga →</a>
+            </div>
+
+            <div class="anime-card bg-gray-800/40 border border-cyan-500/20 p-5 rounded-xl"
+                 data-title="attack on titan">
+                <h3 class="text-xl font-bold text-cyan-300">Attack on Titan</h3>
+                <p class="text-gray-400 text-sm mt-1">Action / Dark Fantasy</p>
+                <a href="#" class="text-cyan-400 mt-3 inline-block">Read Manga →</a>
+            </div>
+
+            <div class="anime-card bg-gray-800/40 border border-cyan-500/20 p-5 rounded-xl"
+                 data-title="demon slayer">
+                <h3 class="text-xl font-bold text-cyan-300">Demon Slayer</h3>
+                <p class="text-gray-400 text-sm mt-1">Adventure / Shonen</p>
+                <a href="#" class="text-cyan-400 mt-3 inline-block">Read Manga →</a>
+            </div>
+
         </div>
-    </div>
+    </section>
 
     <!-- FOOTER AD -->
     <div class="w-full bg-gray-900/40 border border-cyan-500/20 p-3 mb-4 text-center text-cyan-300">
-        Footer Ad Banner — Display your business here
+        Footer Ad — Promote your business here
     </div>
 
     <footer class="text-center text-gray-400 pb-6">
@@ -158,40 +185,21 @@
 
 </div>
 
-<!-- SCRIPT -->
+<!-- JAVASCRIPT -->
 <script>
-/* Cinematic glowing LEVI intro */
+/* INTRO CINEMATIC */
 anime.timeline({})
-  .add({
-      targets: "#L",
-      opacity: [0,1],
-      scale: [0.5,1],
-      duration: 600,
-      easing: "easeOutBack"
-  })
-  .add({
-      targets: "#E",
-      opacity: [0,1],
-      scale: [0.5,1],
-      duration: 600
-  })
-  .add({
-      targets: "#V",
-      opacity: [0,1],
-      scale: [0.5,1],
-      duration: 600
-  })
+  .add({ targets: "#L", opacity: [0,1], scale: [0.5,1], duration: 600 })
+  .add({ targets: "#E", opacity: [0,1], scale: [0.5,1], duration: 600 })
+  .add({ targets: "#V", opacity: [0,1], scale: [0.5,1], duration: 600 })
   .add({
       targets: "#I",
-      opacity: [0,1],
-      scale: [0.5,1],
-      duration: 600,
+      opacity: [0,1], scale: [0.5,1], duration: 600,
       complete: () => {
           anime({
               targets: "#introScreen h1",
               opacity: [1,0],
               duration: 800,
-              easing: "easeOutQuad",
               complete: () => {
                   introScreen.style.display = "none";
                   mainContent.classList.remove("hidden");
@@ -200,7 +208,7 @@ anime.timeline({})
       }
   });
 
-/* Sidebar logic */
+/* SIDEBAR */
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
 
@@ -209,23 +217,47 @@ document.getElementById("openSidebar").onclick = () => {
     overlay.classList.remove("hidden");
 };
 
-document.getElementById("closeSidebar").onclick = closeSide;
-overlay.onclick = closeSide;
-
 function closeSide() {
     sidebar.style.transform = "translateX(-100%)";
     overlay.classList.add("hidden");
 }
 
-/* IMAGE SLIDESHOW */
+document.getElementById("closeSidebar").onclick = closeSide;
+overlay.onclick = closeSide;
+
+/* SLIDESHOW */
 let slides = document.querySelectorAll("#slider img");
 let index = 0;
 
 setInterval(() => {
-    slides[index].style.opacity = 0;
+    slides[index].style.opacity = "0";
     index = (index + 1) % slides.length;
-    slides[index].style.opacity = 1;
+    slides[index].style.opacity = "1";
 }, 4000);
+
+/* SEARCH FILTER */
+const searchInput = document.getElementById("searchBar");
+const mangaCards = document.querySelectorAll("#mangaList .anime-card");
+
+searchInput.addEventListener("keyup", () => {
+    let filter = searchInput.value.toLowerCase();
+
+    mangaCards.forEach(card => {
+        let title = card.getAttribute("data-title");
+
+        if (title.includes(filter)) {
+            card.style.display = "block";
+            anime({
+                targets: card,
+                opacity: [0,1],
+                translateY: [20,0],
+                duration: 300
+            });
+        } else {
+            card.style.display = "none";
+        }
+    });
+});
 </script>
 
 </body>
