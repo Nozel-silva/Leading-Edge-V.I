@@ -8,167 +8,199 @@
 <!-- Tailwind CDN -->
 <script src="https://cdn.tailwindcss.com"></script>
 
-<!-- Anime.js for Animations -->
+<!-- Anime.js -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
 
 <style>
     body {
-        background: linear-gradient(135deg, #0a0f1f 0%, #111827 100%);
+        background: linear-gradient(135deg, #080c16, #101827 70%);
         overflow-x: hidden;
         font-family: 'Montserrat', sans-serif;
     }
 
-    /* Decorative glowing shapes */
-    .glow-shape {
+    /* Decorative glows */
+    .glow {
         position: absolute;
         width: 250px;
         height: 250px;
-        background: radial-gradient(circle, rgba(0,255,255,0.2), transparent 70%);
         border-radius: 50%;
-        filter: blur(60px);
+        background: radial-gradient(circle, rgba(0,255,255,0.15), transparent 70%);
+        filter: blur(70px);
         pointer-events: none;
     }
 
-    /* LEVI intro screen */
+    /* Intro screen */
     #introScreen {
         position: fixed;
         inset: 0;
-        background: black;
-        z-index: 9999;
+        background: #000;
         display: flex;
         justify-content: center;
         align-items: center;
-        flex-direction: row;
+        z-index: 9999;
+        gap: 15px;
     }
+
     #introScreen h1 {
         font-size: 4rem;
         font-weight: 900;
-        color: white;
+        color: cyan;
         opacity: 0;
-        letter-spacing: 10px;
+        text-shadow: 0 0 20px cyan, 0 0 40px cyan;
     }
 
-    /* Sidebar */
+    /* Sidebar transition */
     #sidebar {
         transition: transform .3s ease;
     }
 
+    /* Card hover effect */
+    .anime-card {
+        transition: all .3s;
+    }
     .anime-card:hover {
         transform: translateY(-4px);
-        box-shadow: 0 0 20px rgba(0,255,255,.3);
+        box-shadow: 0 0 25px rgba(0,255,255,.30);
+    }
+
+    /* Slideshow */
+    #slider img {
+        transition: opacity 1s ease-in-out;
     }
 </style>
 </head>
 
 <body class="text-white">
 
-<!-- glowing background shapes -->
-<div class="glow-shape top-10 left-10"></div>
-<div class="glow-shape bottom-20 right-20"></div>
-<div class="glow-shape top-1/2 right-1/3"></div>
+<!-- GLOWS -->
+<div class="glow top-20 left-10"></div>
+<div class="glow bottom-20 right-20"></div>
 
 <!-- INTRO SCREEN -->
 <div id="introScreen">
-    <h1 id="letterL">L</h1>
-    <h1 id="letterE">E</h1>
-    <h1 id="letterV">V</h1>
-    <h1 id="letterI">I</h1>
+    <h1 id="L">L.</h1>
+    <h1 id="E">E.</h1>
+    <h1 id="V">V.</h1>
+    <h1 id="I">I</h1>
 </div>
 
-<!-- MAIN CONTENT -->
 <div id="mainContent" class="hidden">
 
-    <!-- NAV -->
-    <div class="p-4 flex items-center justify-between">
-        <button id="openSidebar" class="text-cyan-300 text-2xl">☰</button>
-        <h2 class="text-xl font-bold tracking-wide text-cyan-300">Anime Manga Hub</h2>
+    <!-- TOP AD BANNER -->
+    <div class="w-full bg-gray-900/40 border border-cyan-500/20 p-2 text-center text-cyan-300 text-sm">
+        🔥 Ad Banner Space — Promote your brand here 🔥
     </div>
 
-    <!-- Sidebar -->
+    <!-- NAV -->
+    <div class="flex justify-between items-center p-4">
+        <button id="openSidebar" class="text-cyan-300 text-2xl">☰</button>
+        <h2 class="text-xl font-bold text-cyan-300 tracking-wide">Anime Manga Hub</h2>
+    </div>
+
+    <!-- SIDEBAR + overlay -->
     <div id="overlay" class="fixed inset-0 bg-black/50 hidden"></div>
 
     <div id="sidebar" class="fixed top-0 left-0 w-64 h-full bg-gray-900/90 backdrop-blur-xl p-6 transform -translate-x-full z-50">
-        <button id="closeSidebar" class="text-right w-full text-cyan-300 text-2xl">×</button>
-        <h3 class="text-cyan-400 font-bold text-lg mb-4">Menu</h3>
+        <button id="closeSidebar" class="text-right w-full text-2xl text-cyan-300">×</button>
+        <h3 class="text-cyan-400 font-bold mb-4 text-lg">Menu</h3>
         <ul class="space-y-3">
             <li class="hover:text-cyan-300">🏠 Home</li>
             <li class="hover:text-cyan-300">⭐ Favorites</li>
             <li class="hover:text-cyan-300">📚 Manga Library</li>
-            <li class="hover:text-cyan-300">⚙️ Settings</li>
+            <li class="hover:text-cyan-300">⚙ Settings</li>
         </ul>
     </div>
 
-    <!-- Anime list -->
-    <div class="px-6 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
 
-        <!-- Example Card -->
-        <div class="anime-card bg-gray-800/50 backdrop-blur-xl shadow-lg p-4 rounded-xl border border-cyan-500/10">
-            <h3 class="font-bold text-xl text-cyan-300">Jujutsu Kaisen</h3>
+    <!-- image slideshow / hero -->
+    <div class="relative w-full h-56 md:h-72 overflow-hidden rounded-xl shadow-lg mx-auto px-3">
+        <div id="slider" class="w-full h-full">
+            <img src="https://picsum.photos/800/400?random=1" class="absolute inset-0 w-full h-full object-cover opacity-100">
+            <img src="https://picsum.photos/800/400?random=2" class="absolute inset-0 w-full h-full object-cover opacity-0">
+            <img src="https://picsum.photos/800/400?random=3" class="absolute inset-0 w-full h-full object-cover opacity-0">
+        </div>
+    </div>
+
+    <!-- MID AD -->
+    <div class="w-full bg-gray-900/40 border border-cyan-500/20 p-3 mt-6 text-center text-cyan-300">
+        Sponsored Ad — Your banner can be placed here
+    </div>
+
+    <!-- Anime Listing -->
+    <div class="px-6 mt-8 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-20">
+        <div class="anime-card bg-gray-800/40 border border-cyan-500/20 p-5 rounded-xl backdrop-blur-xl">
+            <h3 class="text-xl font-bold text-cyan-300">Jujutsu Kaisen</h3>
             <p class="text-gray-400 text-sm mt-1">Supernatural / Action</p>
             <a href="#" class="text-cyan-400 mt-3 inline-block">Read Manga →</a>
         </div>
 
-        <div class="anime-card bg-gray-800/50 backdrop-blur-xl shadow-lg p-4 rounded-xl border border-cyan-500/10">
-            <h3 class="font-bold text-xl text-cyan-300">Attack on Titan</h3>
+        <div class="anime-card bg-gray-800/40 border border-cyan-500/20 p-5 rounded-xl backdrop-blur-xl">
+            <h3 class="text-xl font-bold text-cyan-300">Attack on Titan</h3>
             <p class="text-gray-400 text-sm mt-1">Action / Dark Fantasy</p>
             <a href="#" class="text-cyan-400 mt-3 inline-block">Read Manga →</a>
         </div>
 
-        <div class="anime-card bg-gray-800/50 backdrop-blur-xl shadow-lg p-4 rounded-xl border border-cyan-500/10">
-            <h3 class="font-bold text-xl text-cyan-300">Demon Slayer</h3>
+        <div class="anime-card bg-gray-800/40 border border-cyan-500/20 p-5 rounded-xl backdrop-blur-xl">
+            <h3 class="text-xl font-bold text-cyan-300">Demon Slayer</h3>
             <p class="text-gray-400 text-sm mt-1">Adventure / Shonen</p>
             <a href="#" class="text-cyan-400 mt-3 inline-block">Read Manga →</a>
         </div>
-
     </div>
 
-    <!-- Footer -->
-    <footer class="text-center p-4 text-gray-400 text-sm">
+    <!-- FOOTER AD -->
+    <div class="w-full bg-gray-900/40 border border-cyan-500/20 p-3 mb-4 text-center text-cyan-300">
+        Footer Ad Banner — Display your business here
+    </div>
+
+    <footer class="text-center text-gray-400 pb-6">
         Powered by <span class="text-cyan-300 font-bold">LeadingEdge</span>
     </footer>
 
 </div>
 
+<!-- SCRIPT -->
 <script>
-/* CINEMATIC INTRO */
+/* Cinematic glowing LEVI intro */
 anime.timeline({})
   .add({
-    targets: "#letterL",
-    opacity: [0,1],
-    translateY: [-50,0],
-    duration: 600,
-    easing: "easeOutExpo"
+      targets: "#L",
+      opacity: [0,1],
+      scale: [0.5,1],
+      duration: 600,
+      easing: "easeOutBack"
   })
   .add({
-    targets: "#letterE",
-    opacity: [0,1],
-    translateY: [-50,0],
-    duration: 600
+      targets: "#E",
+      opacity: [0,1],
+      scale: [0.5,1],
+      duration: 600
   })
   .add({
-    targets: "#letterV",
-    opacity: [0,1],
-    translateY: [-50,0],
-    duration: 600
+      targets: "#V",
+      opacity: [0,1],
+      scale: [0.5,1],
+      duration: 600
   })
   .add({
-    targets: "#letterI",
-    opacity: [0,1],
-    translateY: [-50,0],
-    duration: 600
-  })
-  .add({
-    targets: "#introScreen",
-    opacity: [1,0],
-    duration: 900,
-    easing: "easeOutQuad",
-    complete: () => {
-        document.getElementById("introScreen").style.display = "none";
-        document.getElementById("mainContent").classList.remove("hidden");
-    }
+      targets: "#I",
+      opacity: [0,1],
+      scale: [0.5,1],
+      duration: 600,
+      complete: () => {
+          anime({
+              targets: "#introScreen h1",
+              opacity: [1,0],
+              duration: 800,
+              easing: "easeOutQuad",
+              complete: () => {
+                  introScreen.style.display = "none";
+                  mainContent.classList.remove("hidden");
+              }
+          });
+      }
   });
 
-/* SIDEBAR LOGIC */
+/* Sidebar logic */
 const sidebar = document.getElementById("sidebar");
 const overlay = document.getElementById("overlay");
 
@@ -180,10 +212,20 @@ document.getElementById("openSidebar").onclick = () => {
 document.getElementById("closeSidebar").onclick = closeSide;
 overlay.onclick = closeSide;
 
-function closeSide(){
+function closeSide() {
     sidebar.style.transform = "translateX(-100%)";
     overlay.classList.add("hidden");
 }
+
+/* IMAGE SLIDESHOW */
+let slides = document.querySelectorAll("#slider img");
+let index = 0;
+
+setInterval(() => {
+    slides[index].style.opacity = 0;
+    index = (index + 1) % slides.length;
+    slides[index].style.opacity = 1;
+}, 4000);
 </script>
 
 </body>
